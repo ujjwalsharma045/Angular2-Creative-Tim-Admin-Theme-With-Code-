@@ -112,12 +112,12 @@ export class DashboardComponent implements OnInit{
         });
 		
 		this.getTotalUser().subscribe(result => {
-		    console.log(result['records'][0]);
+		    //console.log(result['users']);
 		    this.totaluser  = result['users'];	 	   
 	    });
 		
 		this.getTotalPage().subscribe(result => {
-		    console.log(result['records'][0]);
+		    //console.log(result['pages']);			
 		    this.totalpage  = result['pages'];	 	   
 	    });				
     }
