@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Pages</h4>
+                    <p class="category">List of pages</p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+									<a href="javascript:void(0)" (click)="sortlist('_id')">
+										ID		
+									</a>  
+									<span [ngClass]="{disabled:search.sortfield != '_id'}">
+									   <span *ngIf="!sortreverse">^</span>
+									   <span *ngIf="sortreverse">v</span> 
+									</span>
+							    </th>
+								<th>
+								  <a href="javascript:void(0)" (click)="sortlist('title')">
+									 Title
+								  </a>	
+								  <span [ngClass]="{disabled:search.sortfield != 'title'}">
+									 <span *ngIf="!sortreverse">^</span>
+									 <span *ngIf="sortreverse">v</span>
+								  </span>
+								</th>
+								<th>
+								   <a href="javascript:void(0)" (click)="sortlist('status')">
+									 Status
+								   </a>	 
+								   <span [ngClass]="{disabled:search.sortfield != 'status'}">
+									  <span *ngIf="!sortreverse">^</span>
+									  <span *ngIf="sortreverse">v</span>
+								   </span>
+								</th>
+								<th>
+								  <a href="javascript:void(0)" (click)="sortlist('created_at')">
+									 Created
+								  </a> 
+								  <span [ngClass]="{disabled:search.sortfield != 'created_at'}">
+									  <span *ngIf="!sortreverse">^</span>
+									  <span *ngIf="sortreverse">v</span>
+								  </span>
+								</th>
+								<th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let page of pagedetail">
+                                <td>{{page._id}}</td>
+							    <td>{{page.title}}</td>
+							    <td>{{page.status}}</td>
+							    <td>{{page.created_at}}</td>
+								<td>
+								   <a [routerLink]="['../page/view' , page._id]">View</a>
+								   <a [routerLink]="['../page/edit' , page._id]">Edit</a>
+								   <a href="javascript:void(0)" (click)="deletePage(page._id)">Delete</a> 
+								</td>	   
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>
