@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import {HttpClient} from '@angular/common/http';
 
 declare var $:any;
 
@@ -10,6 +11,15 @@ declare var $:any;
 })
 
 export class DashboardComponent implements OnInit{
+	
+	siteUrl = 'http://localhost:8081/';
+	private totaluser;
+	private totalpage;
+	
+	constructor(private http: HttpClient) { 
+	
+	}
+	
     ngOnInit(){
         var dataSales = {
           labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
@@ -100,5 +110,23 @@ export class DashboardComponent implements OnInit{
           labels: ['62%','32%','6%'],
           series: [62, 32, 6]
         });
+		
+		this.getTotalUser().subscribe(result => {
+		    console.log(result['records'][0]);
+		    this.totaluser  = result['users'];	 	   
+	    });
+		
+		this.getTotalPage().subscribe(result => {
+		    console.log(result['records'][0]);
+		    this.totalpage  = result['pages'];	 	   
+	    });				
     }
+	
+	getTotalUser(){
+	    return this.http.get(this.siteUrl+"totalusers");
+	}
+
+	getTotalPage(){
+		return this.http.get(this.siteUrl+"page/total");
+	}
 }

@@ -270,7 +270,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 		res.send(JSON.stringify({authen:1 , success:1}));							    
 	});
 
-    app.get('/page/total', passport.isAdminAuthenticated, function(req, res){
+    app.get('/page/total', function(req, res){
 		Page.find().count().exec(function(err, count){
 			if(err)
 			  throw err;

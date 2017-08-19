@@ -627,7 +627,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 		res.send(JSON.stringify({authen:1 , success:1}));							    
 	});
 
-    app.get('/totalusers', passport.isAdminAuthenticated, function(req, res){
+    app.get('/totalusers', function(req, res){
 		User.find().count().exec(function(err, count){
 			if(err)
 			  throw err;
