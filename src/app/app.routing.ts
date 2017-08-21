@@ -17,6 +17,8 @@ import { PagesComponent } from './pages/pages.component';
 import { PageaddComponent } from './pageadd/pageadd.component';
 import { PageeditComponent } from './pageedit/pageedit.component';
 import { PageviewComponent } from './pageview/pageview.component';
+import { SettingsComponent } from './settings/settings.component';
+
 export const AppRoutes: Routes = [
     {
         path: '',
@@ -86,5 +88,9 @@ export const AppRoutes: Routes = [
 	{
         path: 'page/view/:id',
         component: PageviewComponent
+    },
+	{
+        path: 'settings',
+        component: SettingsComponent
     }
 ]

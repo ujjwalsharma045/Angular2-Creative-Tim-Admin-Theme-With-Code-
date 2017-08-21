@@ -28,6 +28,7 @@ import { PagesComponent } from './pages/pages.component';
 import { PageaddComponent } from './pageadd/pageadd.component';
 import { PageeditComponent } from './pageedit/pageedit.component';
 import { PageviewComponent } from './pageview/pageview.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PageviewComponent } from './pageview/pageview.component';
     PageaddComponent,
     PageeditComponent,
     PageviewComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
