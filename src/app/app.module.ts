@@ -29,6 +29,7 @@ import { PageaddComponent } from './pageadd/pageadd.component';
 import { PageeditComponent } from './pageedit/pageedit.component';
 import { PageviewComponent } from './pageview/pageview.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SettingsComponent } from './settings/settings.component';
     PageeditComponent,
     PageviewComponent,
     SettingsComponent,
+    AdminloginComponent,
   ],
   imports: [
     BrowserModule,
