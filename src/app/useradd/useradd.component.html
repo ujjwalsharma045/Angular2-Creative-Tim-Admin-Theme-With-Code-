@@ -25,7 +25,7 @@
 							<div class="col-md-5">
 								<div class="form-group">
 									<label>Password</label>
-									<input type="text" [formControl]="userForm.controls['password']" class="form-control border-input" disabled placeholder="Password" value="">
+									<input type="password" [formControl]="userForm.controls['password']" class="form-control border-input" placeholder="Password" value="">
 									<div *ngIf="userForm.controls['password'].hasError('required') && submitted" class="alert alert-danger">Enter password.</div>          
 								</div>
 							</div>
@@ -59,14 +59,14 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>City</label>
 									<input type="text" [formControl]="userForm.controls['city']" class="form-control border-input" placeholder="City" value="">
-									<div *ngIf="userForm.controls['city'].hasError('required') && submitted" class="alert alert-danger">Enter user name.</div>          
+									<div *ngIf="userForm.controls['city'].hasError('required') && submitted" class="alert alert-danger">Enter city name.</div>          
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>State</label>
 									<input type="text" [formControl]="userForm.controls['state']" class="form-control border-input" placeholder="State" value="">

@@ -9,7 +9,7 @@
 					<form [formGroup]="userForm">
 						<div class="row">
 							
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="exampleInputEmail1">Email address</label>
 									<input type="email" [formControl]="userForm.controls['email']" class="form-control border-input" placeholder="Email">
@@ -46,14 +46,14 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>City</label>
 									<input type="text" [formControl]="userForm.controls['city']" class="form-control border-input" placeholder="City">
-									<div *ngIf="userForm.controls['city'].hasError('required') && submitted" class="alert alert-danger">Enter user name.</div>          
+									<div *ngIf="userForm.controls['city'].hasError('required') && submitted" class="alert alert-danger">Enter city name.</div>          
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>State</label>
 									<input type="text" [formControl]="userForm.controls['state']" class="form-control border-input" placeholder="State">
