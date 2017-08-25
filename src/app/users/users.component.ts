@@ -5,12 +5,13 @@ import * as _ from 'underscore';
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {URLSearchParams} from '@angular/http';
 import {HttpClient} from '@angular/common/http';
+import { PagerService } from '../services/pager.service';
 import 'rxjs/Rx';
 @Component({
     selector: 'users-cmp', 
     moduleId: module.id,
     templateUrl: 'user.component.html',  
-	providers:[UserService] 
+	providers:[UserService , PagerService] 
 })
 
 export class UsersComponent implements OnInit{
@@ -39,7 +40,7 @@ export class UsersComponent implements OnInit{
     private sectionTitle = 'Users';
     private userUrl = 'http://localhost:8081/';
 	
-	constructor(private http: HttpClient) {    
+	constructor(private http: HttpClient, private pagerService:PagerService) {    
         /*if(!userService.is_loggedin()){			
 	       router.navigate(['./login']);
 	    }*/	 
@@ -70,29 +71,23 @@ export class UsersComponent implements OnInit{
 			}
 			 
 			return this.http.get(this.userUrl+"showusers?"+params.toString()).subscribe(result => {
-			   
 			   this.userdetail  = result['records'];
-			   //this.allItems = result.totalrecords;
-			   //this.pageSize = result.totalpages;
-			   //this.setPage(this.currentPage);
+			   this.allItems = result['totalrecords'];
+			   this.pageSize = result['totalpages'];
+			   this.setPage(this.currentPage);
 		    }); 
 		}
 		else { 
-		    
-			return this.http.get(this.userUrl+"showusers").subscribe(result => {
+		    return this.http.get(this.userUrl+"showusers").subscribe(result => {
 			   this.userdetail  = result['records'];
-			   //this.allItems = result.totalrecords;
-			   //this.pageSize = result.totalpages;
-			   //this.setPage(this.currentPage);
+			   this.allItems = result['totalrecords'];
+			   this.pageSize = result['totalpages'];
+			   this.setPage(this.currentPage);
 		    });
 		}	  
     }
 	
 	deleteUserConfirm(uids){
-		
-	}
-	
-	sortlist(type){
 		
 	}
 
@@ -106,5 +101,47 @@ export class UsersComponent implements OnInit{
 
     removeUser(id){
 		return this.http.delete(this.userUrl+"delete/"+id); 	  	  
-	}	
+	}
+
+    setPage(page: number) {
+	  if(page < 1 || page > this.pager.totalPages){
+		 return;
+	  }	  
+	  	  	  
+	  // get pager object from service
+	  this.pager = this.pagerService.getPager(this.allItems, page, this.allItems/this.pageSize);       	  
+    }
+
+    searchUser(){	        
+        this.currentPage = 1;
+	    this.search.page = this.currentPage;
+	    this.userList(this.search);
+    }
+  
+    paging(pageno){	  
+        this.currentPage = pageno;
+	    this.search.page = pageno;
+	    this.userList(this.search);
+    }
+
+    sortlist(field){
+	    if(this.search.sortfield==field){
+		  if(this.sortreverse){
+		    this.sortreverse = false;
+			this.search.sorttype = 'desc';
+		  }
+          else { 
+            this.sortreverse = true;
+            this.search.sorttype = 'asc';			
+		  }
+	    }
+	    else {
+	       this.search.sortfield = field;
+		   this.sortreverse = true;
+		   this.search.sorttype = 'asc';
+	    }
+	  
+	    this.search.page = this.currentPage;
+	    this.userList(this.search);
+    }	
 }
