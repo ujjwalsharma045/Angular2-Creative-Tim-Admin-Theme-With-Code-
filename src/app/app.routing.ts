@@ -34,19 +34,35 @@ export const AppRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+		data : {title : 'Dashboard'},
 		children:[
 		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
            { path: '', component:NavbarComponent, outlet:'navbar'},
            { path: '', component:FooterComponent, outlet:'footer'}
 		],
     },
-    {
+    /*{
         path: 'user',
         children:[
-		   { path: 'add', component:UseraddComponent}, 
+		   { path: 'add', component:UseraddComponent, data : {somedata : 'some value'}}, 
            { path: 'edit/:id', component:UsereditComponent},
            { path: 'view/:id', component:UserviewComponent}
 		],		
+    },*/
+	{
+        path: 'user/add',
+        component:UseraddComponent, 
+		data:{title:'Add User'}
+    },
+	{
+        path: 'user/edit/:id',
+		component:UsereditComponent, 
+		data:{title:'Edit User'}        	
+    },
+	{
+        path: 'user/view/:id',
+		component:UserviewComponent, 
+		data:{title:'View User'}        	        	
     },
     {
         path: 'table',
@@ -75,6 +91,7 @@ export const AppRoutes: Routes = [
 	{
         path: 'users',
         component: UsersComponent,
+		data:{title:'Users'},
 		children:[
 		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
            { path: '', component:NavbarComponent, outlet:'navbar'},
@@ -84,27 +101,45 @@ export const AppRoutes: Routes = [
 	{
         path: 'pages',
         component: PagesComponent,
+		data:{title:'Pages'},
 		children:[
 		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
            { path: '', component:NavbarComponent, outlet:'navbar'},
            { path: '', component:FooterComponent, outlet:'footer'}
 		],
     },
-	{
+	/* {
         path: 'page',
 		children:[
 		   { path: 'add', component:PageaddComponent}, 
            { path: 'edit/:id', component:PageeditComponent},
            { path: 'view/:id', component:PageviewComponent}
 		],
+    }, */
+    {
+        path: 'page/add',
+		component:PageaddComponent,
+		data:{title:'Add Page'}		
+    },
+    {
+        path: 'page/edit/:id',
+		component:PageeditComponent,
+		data:{title:'Edit Page'}		
+    },
+    {
+        path: 'page/view/:id',
+		component:PageviewComponent,
+		data:{title:'View Page'}		
     },	
 	{
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
+		data:{title:'Settings'}
     },
 	{
         path: 'login',
         component: AdminloginComponent,
+		data:{title:'Sign-In'},
 		children:[
 		   { path: '', component:HeaderComponent, outlet:'header'},            
            { path: '', component:FooterComponent, outlet:'footer'}
@@ -113,6 +148,7 @@ export const AppRoutes: Routes = [
 	{
         path: 'register',
         component: RegisterComponent,
+		data:{title:'Sign-Up'},
 		children:[
 		   { path: '', component:HeaderComponent, outlet:'header'},            
            { path: '', component:FooterComponent, outlet:'footer'}

@@ -69,7 +69,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>State</label>
-									<input type="text" [formControl]="userForm.controls['state']" class="form-control border-input" placeholder="Country" value="">
+									<input type="text" [formControl]="userForm.controls['state']" class="form-control border-input" placeholder="State" value="">
 									<div *ngIf="userForm.controls['state'].hasError('required') && submitted" class="alert alert-danger">Enter state name.</div>          
 								</div>
 							</div>

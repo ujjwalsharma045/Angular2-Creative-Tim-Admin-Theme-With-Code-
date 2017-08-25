@@ -18,7 +18,7 @@ export class AppComponent{
 	}
 	
 	ngOnInit() {
-		if(window.location.pathname!="/login"){
+		if(window.location.pathname!="/login" && window.location.pathname!="/register"){
             this.isLogin = false; 
 		}
 		else {

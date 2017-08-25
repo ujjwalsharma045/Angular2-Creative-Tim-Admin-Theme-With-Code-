@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'router-outlet[name="header"]',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    private title;
+    constructor(private router: Router, private route:ActivatedRoute) { 
+		router.events.filter(e => e instanceof NavigationEnd).forEach(e => {
+			this.title = route.root.firstChild.snapshot.data['title'];
+		}); 
+    }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() {
+    }
+	
+	getTitle(){		
+		return this.title;
+    }
 }
