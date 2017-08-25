@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-
+import { SidebarComponent }   from './sidebar/sidebar.component';
+import { NavbarComponent }   from './shared/navbar/navbar.component';
+import { FooterComponent }   from './shared/footer/footer.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { UserComponent }   from './user/user.component';
 import { TableComponent }   from './table/table.component';
@@ -18,6 +20,10 @@ import { PageaddComponent } from './pageadd/pageadd.component';
 import { PageeditComponent } from './pageedit/pageedit.component';
 import { PageviewComponent } from './pageview/pageview.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { Sidebar2Component } from './sidebar2/sidebar2.component';
+import { HeaderComponent } from './header/header.component';
+import { RegisterComponent } from './register/register.component';
 
 export const AppRoutes: Routes = [
     {
@@ -27,11 +33,20 @@ export const AppRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+		children:[
+		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
+           { path: '', component:NavbarComponent, outlet:'navbar'},
+           { path: '', component:FooterComponent, outlet:'footer'}
+		],
     },
     {
         path: 'user',
-        component: UserComponent
+        children:[
+		   { path: 'add', component:UseraddComponent}, 
+           { path: 'edit/:id', component:UsereditComponent},
+           { path: 'view/:id', component:UserviewComponent}
+		],		
     },
     {
         path: 'table',
@@ -59,38 +74,59 @@ export const AppRoutes: Routes = [
     }, 
 	{
         path: 'users',
-        component: UsersComponent
-    },
-	{
-        path: 'user/add',
-        component: UseraddComponent
-    },
-	{
-        path: 'user/edit/:id',
-        component: UsereditComponent
-    },
-	{
-        path: 'user/view/:id',
-        component: UserviewComponent
+        component: UsersComponent,
+		children:[
+		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
+           { path: '', component:NavbarComponent, outlet:'navbar'},
+           { path: '', component:FooterComponent, outlet:'footer'}
+		],
     },
 	{
         path: 'pages',
-        component: PagesComponent
+        component: PagesComponent,
+		children:[
+		   { path: '', component:SidebarComponent, outlet:'sidebar'}, 
+           { path: '', component:NavbarComponent, outlet:'navbar'},
+           { path: '', component:FooterComponent, outlet:'footer'}
+		],
     },
 	{
-        path: 'page/add',
-        component: PageaddComponent
-    },
-	{
-        path: 'page/edit/:id',
-        component: PageeditComponent
-    },
-	{
-        path: 'page/view/:id',
-        component: PageviewComponent
-    },
+        path: 'page',
+		children:[
+		   { path: 'add', component:PageaddComponent}, 
+           { path: 'edit/:id', component:PageeditComponent},
+           { path: 'view/:id', component:PageviewComponent}
+		],
+    },	
 	{
         path: 'settings',
         component: SettingsComponent
+    },
+	{
+        path: 'login',
+        component: AdminloginComponent,
+		children:[
+		   { path: '', component:HeaderComponent, outlet:'header'},            
+           { path: '', component:FooterComponent, outlet:'footer'}
+		],
+    },
+	{
+        path: 'register',
+        component: RegisterComponent,
+		children:[
+		   { path: '', component:HeaderComponent, outlet:'header'},            
+           { path: '', component:FooterComponent, outlet:'footer'}
+		],
     }
+]
+
+export const LoginRoutes: Routes = [    
+	/*{
+        path: 'login',
+        component: AdminloginComponent, 
+		children:[
+		   { path: '', component:HeaderComponent, outlet:'header'},
+           { path: '', component:FooterComponent, outlet:'footer'}
+		]
+    }*/
 ]

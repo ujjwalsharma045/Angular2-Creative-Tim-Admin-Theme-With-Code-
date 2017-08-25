@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule, Http, Response, Headers, RequestOptions } from '@angular/http';
 import { AppComponent } from './app.component';
-import { AppRoutes } from './app.routing';
+import { AppRoutes , LoginRoutes } from './app.routing';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
@@ -30,6 +30,10 @@ import { PageeditComponent } from './pageedit/pageedit.component';
 import { PageviewComponent } from './pageview/pageview.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { Sidebar2Component } from './sidebar2/sidebar2.component';
+import { HeaderComponent } from './header/header.component';
+import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -52,11 +56,15 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
     PageviewComponent,
     SettingsComponent,
     AdminloginComponent,
+    Sidebar2Component,
+    HeaderComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
 	HttpModule,
     RouterModule.forRoot(AppRoutes),
+	RouterModule.forRoot(LoginRoutes),
     SidebarModule,
     NavbarModule,
     FooterModule,

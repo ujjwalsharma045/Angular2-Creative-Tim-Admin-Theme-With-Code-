@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'footer-cmp',
+    selector: 'router-outlet[name="footer"]',
     templateUrl: 'footer.component.html'
 })
 

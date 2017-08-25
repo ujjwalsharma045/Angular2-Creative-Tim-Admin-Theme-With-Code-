@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
 
 declare var $:any;
 
@@ -8,4 +9,20 @@ declare var $:any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{}
+export class AppComponent{
+	
+	private isLogin:boolean;
+	
+	constructor(private route: ActivatedRoute, private router: Router){
+ 	    
+	}
+	
+	ngOnInit() {
+		if(window.location.pathname!="/login"){
+            this.isLogin = false; 
+		}
+		else {
+			this.isLogin = true; 
+		}
+    }
+}

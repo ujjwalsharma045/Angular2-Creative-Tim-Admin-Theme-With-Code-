@@ -5,7 +5,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 
 @Component({
     moduleId: module.id,
-    selector: 'navbar-cmp',
+    selector: 'router-outlet[name="navbar"]',
     templateUrl: 'navbar.component.html'
 })
 
@@ -15,10 +15,12 @@ export class NavbarComponent implements OnInit{
     private nativeElement: Node;
     private toggleButton;
     private sidebarVisible: boolean;
+	
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef) {
+    constructor(location:Location, private renderer : Renderer, private element : ElementRef,  private router: Router) {
+		//alert(this.router.url);
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit{
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
+	
     getTitle(){
         var titlee = window.location.pathname;
         titlee = titlee.substring(1);
@@ -39,6 +42,7 @@ export class NavbarComponent implements OnInit{
         }
         return 'Dashboard';
     }
+	
     sidebarToggle(){
         var toggleButton = this.toggleButton;
         var body = document.getElementsByTagName('body')[0];
@@ -55,4 +59,8 @@ export class NavbarComponent implements OnInit{
             body.classList.remove('nav-open');
         }
     }
+	
+	logout(){
+		window.location.href = "/login";
+	}
 }

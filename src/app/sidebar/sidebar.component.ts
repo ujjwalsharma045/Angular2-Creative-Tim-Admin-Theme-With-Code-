@@ -24,20 +24,21 @@ export const ROUTES: RouteInfo[] = [
 
 @Component({
     moduleId: module.id,
-    selector: 'sidebar-cmp',
+    selector: 'router-outlet[name="sidebar"]',
     templateUrl: 'sidebar.component.html',
 })
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+	
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
+	
     isNotMobileMenu(){
         if($(window).width() > 991){
             return false;
         }
         return true;
     }
-
 }
