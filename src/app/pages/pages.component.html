@@ -63,9 +63,15 @@
 							    <td>{{page.status}}</td>
 							    <td>{{page.created_at}}</td>
 								<td>
-								   <a [routerLink]="['../page/view' , page._id]">View</a>
-								   <a [routerLink]="['../page/edit' , page._id]">Edit</a>
-								   <a href="javascript:void(0)" (click)="deletePage(page._id)">Delete</a> 
+								    <a [routerLink]="['../page/view' , page._id]">
+								       <i class="fa fa-eye" aria-hidden="true"></i>
+								    </a>
+								    <a [routerLink]="['../page/edit' , page._id]">
+									   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+								    <a href="javascript:void(0)" (click)="deletePage(page._id)">
+									   <i class="fa fa-trash-o" aria-hidden="true"></i>
+									</a> 
 								</td>	   
                             </tr>
                         </tbody>

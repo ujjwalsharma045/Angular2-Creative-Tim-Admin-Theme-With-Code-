@@ -63,13 +63,19 @@
 							    <td>{{user.email}}</td>
 							    <td>{{user.created_at}}</td>
 								<td>
-								   <a [routerLink]="['../user/view' , user._id]">View</a>
-								   <a [routerLink]="['../user/edit' , user._id]">Edit</a>
-								   <a href="javascript:void(0)" (click)="deleteUser(user._id)">Delete</a> 
+								    <a [routerLink]="['../user/view' , user._id]">
+									   <i class="fa fa-eye" aria-hidden="true"></i>
+									</a>
+								    <a [routerLink]="['../user/edit' , user._id]">
+								       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+								    </a>
+								    <a href="javascript:void(0)" (click)="deleteUser(user._id)">
+									   <i class="fa fa-trash-o" aria-hidden="true"></i>
+									</a> 
 								</td>	   
                             </tr>
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
             </div>
         </div>       
