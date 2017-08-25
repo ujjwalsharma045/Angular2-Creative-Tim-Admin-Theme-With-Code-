@@ -76,6 +76,25 @@
                             </tr>
                         </tbody>
                     </table>
+					<div style="margin-left:30%">
+						<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+							<li [ngClass]="{disabled:pager.currentPage === 1}">
+								<a href="javascript:void(0)" (click)="paging(1)">First</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === 1}">
+								<a href="javascript:void(0)" (click)="paging(pager.currentPage - 1)">Previous</a>
+							</li>
+							<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+								<a href="javascript:void(0)" (click)="paging(page)">{{page}}</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+								<a href="javascript:void(0)" (click)="paging(pager.currentPage + 1)">Next</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+								<a href="javascript:void(0)" (click)="paging(pager.totalPages)">Last</a>
+							</li>
+						</ul>
+                    </div>
 
                 </div>
             </div>

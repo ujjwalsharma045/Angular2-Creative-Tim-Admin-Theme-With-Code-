@@ -4,11 +4,13 @@ import * as _ from 'underscore';
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {URLSearchParams} from '@angular/http';
 import {HttpClient} from '@angular/common/http';
+import { PagerService } from '../services/pager.service';
 
 @Component({
   selector: 'pages-cmp',
   templateUrl: './pages.component.html',
-  styleUrls: ['./pages.component.css']
+  styleUrls: ['./pages.component.css'],
+  providers:[PagerService] 
 })
 
 export class PagesComponent implements OnInit {
@@ -36,7 +38,7 @@ export class PagesComponent implements OnInit {
     private sectionTitle = 'Pages';
     private pageUrl = 'http://localhost:8081/';
 
-    constructor(private http:HttpClient) { }
+    constructor(private http:HttpClient , private pagerService:PagerService) { }
 
     ngOnInit() {
 	  this.pagedetail = this.pageList("");	  
@@ -64,18 +66,18 @@ export class PagesComponent implements OnInit {
 			return this.http.get(this.pageUrl+"page/index?"+params.toString()).subscribe(result => {
 			   
 			   this.pagedetail  = result['records'];
-			   //this.allItems = result.totalrecords;
-			   //this.pageSize = result.totalpages;
-			   //this.setPage(this.currentPage);
+			   this.allItems = result['totalrecords'];
+			   this.pageSize = result['totalpages'];
+			   this.setPage(this.currentPage);
 		    }); 
 		}
 		else { 
 		    
 			return this.http.get(this.pageUrl+"page/index").subscribe(result => {
 			   this.pagedetail  = result['records'];
-			   //this.allItems = result.totalrecords;
-			   //this.pageSize = result.totalpages;
-			   //this.setPage(this.currentPage);
+			   this.allItems = result['totalrecords'];
+			   this.pageSize = result['totalpages'];
+			   this.setPage(this.currentPage);
 		    });
 		}	  
     }
@@ -91,4 +93,46 @@ export class PagesComponent implements OnInit {
 	remove(pageid){
 		return this.http.delete(this.pageUrl+"page/delete/"+pageid);
 	}
+	
+	setPage(page: number) {
+	  if(page < 1 || page > this.pager.totalPages){
+		 return;
+	  }	  
+	  	  	  
+	  // get pager object from service
+	  this.pager = this.pagerService.getPager(this.allItems, page, this.allItems/this.pageSize);       	  
+    }
+
+    searchUser(){	        
+        this.currentPage = 1;
+	    this.search.page = this.currentPage;
+	    this.pageList(this.search);
+    }
+  
+    paging(pageno){	  
+        this.currentPage = pageno;
+	    this.search.page = pageno;
+	    this.pageList(this.search);
+    }
+
+    sortlist(field){
+	    if(this.search.sortfield==field){
+		  if(this.sortreverse){
+		    this.sortreverse = false;
+			this.search.sorttype = 'desc';
+		  }
+          else { 
+            this.sortreverse = true;
+            this.search.sorttype = 'asc';			
+		  }
+	    }
+	    else {
+	       this.search.sortfield = field;
+		   this.sortreverse = true;
+		   this.search.sorttype = 'asc';
+	    }
+	  
+	    this.search.page = this.currentPage;
+	    this.pageList(this.search);
+    }
 }
