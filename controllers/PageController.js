@@ -35,12 +35,14 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
                    req.query.sorttype = 'asc';
 				}
 				
-				if(req.query.sortfield=="id")
+				if(req.query.sortfield=="_id")
 				   sortsection._id = req.query.sorttype; 	
 				else if(req.query.sortfield=="title")					
 			       sortsection.title = req.query.sorttype; 
 				else if(req.query.sortfield=="status")					
-			       sortsection.status = req.query.sorttype; 				
+			       sortsection.status = req.query.sorttype;
+                else if(req.query.sortfield=="created_at")					
+			       sortsection.created_at = req.query.sorttype; 			   
 			}
 			else { 
 				sortsection._id = 'asc'; 	
@@ -48,7 +50,8 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 			
 			//console.log(sortsection);	
             page = (req.query.page && req.query.page>0)? req.query.page:1;			
-            perPage = (req.query.limit && req.query.limit>0)? req.query.limit:5; 			
+            perPage = (req.query.limit && req.query.limit>0)? req.query.limit:2; 			
+			perPage =2;
 			Page.find(data).count().exec(function(err, count){
 				  var totalPages = math.ceil(count/perPage);
 				  //console.log(totalPages);

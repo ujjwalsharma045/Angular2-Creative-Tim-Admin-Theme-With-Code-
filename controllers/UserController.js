@@ -84,7 +84,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 			       sortsection.username = req.query.sorttype; 
 			    else if(req.query.sortfield=="dateofbirth")					
 			       sortsection.dateofbirth = req.query.sorttype; 
-			   else if(req.query.sortfield=="created_at")					
+			    else if(req.query.sortfield=="created_at")					
 			       sortsection.created_at = req.query.sorttype; 
 			}
 			else { 
@@ -134,7 +134,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 		}); 		
 	});
 
-    app.post("/edit/:id", multer({dest: "./uploads/"}).array("uploads", 12), function(req, res){			    	
+    app.post("/edit/:id",  function(req, res){			    	
 			var userid = req.params.id; 
 			var error = [];	
 			var data = {};
@@ -142,7 +142,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 				
 			if(req.method=="POST"){
 				if(error.length <=0){		 
-					console.log(req.files);
+					//console.log(req.files);
 					console.log("xf");									                          
 					var currentdate = new Date();
 					var formatteddate = dateFormat(currentdate ,'yyyy-mm-dd HH:MM:ss');
@@ -153,7 +153,7 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 						address:req.body.address,
 						city:req.body.city,
 						state:req.body.state,
-						profile_pic:req.files[0].filename,
+						//profile_pic:req.files[0].filename,
 						zipcode:req.body.zipcode,
 						dateofbirth:req.body.dateofbirth,	
 						modified_at:formatteddate
@@ -180,7 +180,8 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 		res.send(JSON.stringify({authen:1 ,success:1}));						
 	});
 
-    app.post("/adduser", multer({dest: "./uploads/"}).array("uploads", 12), function(req , res){			console.log(req.files); 
+    app.post("/adduser",  function(req , res){			
+	        //console.log(req.files); 
 			var error = [];
 			var data = {};
 			if(req.method=="POST"){
@@ -188,34 +189,33 @@ module.exports = function(app , func , mail, upload, storage, mailer, multer, va
 				    //console.log(req.body); 
 					//console.log(req.file); 
 				   
-						 //console.log(req.file); 
+				    //console.log(req.file); 
 						 
-						 console.log(req.files); 
-						 
-                             var currentdate = new Date();
-                             var formatteddate = dateFormat(currentdate ,'yyyy-mm-dd HH:MM:ss');				   
-					         data = {
-								 first_name:req.body.first_name,
-								 last_name:req.body.last_name,
-								 email:req.body.email,
-								 username:req.body.username,
-								 password:bCrypt.hashSync(req.body.password),
-								 profile_pic:req.files[0].filename,
-								 dateofbirth:req.body.dateofbirth,
-								 created_at :formatteddate 						
-					        };
-                         
-						
-					    console.log(data);			   
-						var detail = new User(data);
-						detail.save(function(err){
-							  if(err) throw err;
-							  console.log('User saved successfully!');
+					//console.log(req.files); 
+					 
+					var currentdate = new Date();
+					var formatteddate = dateFormat(currentdate ,'yyyy-mm-dd HH:MM:ss');				   
+					data = {
+						 first_name:req.body.first_name,
+						 last_name:req.body.last_name,
+						 email:req.body.email,
+						 username:req.body.username,
+						 password:bCrypt.hashSync(req.body.password),
+						 //profile_pic:req.files[0].filename,
+						 dateofbirth:req.body.dateofbirth,
+						 created_at :formatteddate 						
+					};
+                         						
+					console.log(data);			   
+					var detail = new User(data);
+					detail.save(function(err){
+						if(err) throw err;
+							console.log('User saved successfully!');
 							  
-							  var profile_data = {
-								  description:'ss',
-								  user_id:detail._id
-							  };
+						  var profile_data = {
+							  description:'ss',
+							  user_id:detail._id
+						  };
 							  
 							  var profile_detail = new UserProfile(profile_data);
 							  

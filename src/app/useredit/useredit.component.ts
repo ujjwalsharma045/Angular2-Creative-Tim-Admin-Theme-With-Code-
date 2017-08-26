@@ -21,12 +21,12 @@ export class UsereditComponent implements OnInit {
     private userid = "" 
     constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private formBuilder: FormBuilder) {
         this.userForm = formBuilder.group({      
-		    'email':[null, Validators.required], 
 			'first_name':[null, Validators.required],
 			'last_name':[null, Validators.required],
 			'address' : [null, Validators.required],
 		    'city' : [null, Validators.required],
-		    'state' : [null, Validators.required]
+		    'state' : [null, Validators.required],
+			'zipcode' : [null]
         });	    
     }
 

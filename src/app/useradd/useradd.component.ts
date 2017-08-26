@@ -18,7 +18,7 @@ export class UseraddComponent implements OnInit {
     private submitted = false;
     private sectionTitle = 'Add User';
 	private fileList:any;
-	userUrl = "";
+	userUrl = "http://localhost:8081/";
     constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { 
         this.userForm = formBuilder.group({      
 			'username':[null, Validators.required],      
@@ -28,7 +28,8 @@ export class UseraddComponent implements OnInit {
 			'last_name':[null, Validators.required],
 			'address' : [null, Validators.required],
 		    'city' : [null, Validators.required],
-		    'state' : [null, Validators.required]
+		    'state' : [null, Validators.required],
+			'zipcode' : [null]
         });
     }
 
@@ -39,7 +40,7 @@ export class UseraddComponent implements OnInit {
 	userAdd(){
 	    this.submitted = true;	      
 	    if(this.userForm.valid){ 
-		    this.http.post(this.userUrl+"add" , this.userForm.value).subscribe(result => {
+		    this.http.post(this.userUrl+"adduser" , this.userForm.value).subscribe(result => {
 				if(result['success']=="1"){
 					this.router.navigate(['./users']);	  
 				}
